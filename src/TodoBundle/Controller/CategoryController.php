@@ -51,4 +51,30 @@ class CategoryController extends Controller
             'categories' => $categories,
         ));
     }
+
+    /**
+     * @Route("/category/delete/{id}", name="delete_category")
+     */
+    public function deleteAction($id)
+    {
+        $categorie = $this->getDoctrine()->getRepository('TodoBundle:Category')->findOneById($id);
+
+        if(count($categorie->getTasks()) == 0){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($categorie);
+            $em->flush();
+            $this->addFlash(
+                'notice',
+                'Category deleted'
+            );
+        }
+        else{
+            $this->addFlash(
+                'warning',
+                'Category cannot be deleted'
+            );
+        }
+
+        return $this->redirect("/category/list");
+    }
 }
