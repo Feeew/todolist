@@ -45,7 +45,7 @@ class TagController extends Controller
      */
     public function listAction()
     {
-        $tags = $this->getDoctrine()->getRepository('TodoBundle:Tag')->findAll();
+        $tags = $this->getDoctrine()->getRepository('TodoBundle:Tag')->getTagWithTaskNumber();
 
         return $this->render('TodoBundle:Tag:list.html.twig', array(
             'tags' => $tags,

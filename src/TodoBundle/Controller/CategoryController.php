@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function listAction()
     {
-        $categories = $this->getDoctrine()->getRepository('TodoBundle:Category')->findAll();
+        $categories = $this->getDoctrine()->getRepository('TodoBundle:Category')->getCategoryWithTaskNumber();
 
         return $this->render('TodoBundle:Category:list.html.twig', array(
             'categories' => $categories,

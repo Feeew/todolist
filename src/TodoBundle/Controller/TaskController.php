@@ -48,7 +48,7 @@ class TaskController extends Controller
         $pagination = $paginator->paginate(
             $tasks,
             $request->query->getInt('page', 1),
-            2
+            5
         );
 
         return $pagination;
@@ -75,7 +75,8 @@ class TaskController extends Controller
             );
 
         return $this->render('TodoBundle:Task:list.html.twig', array(
-            'pagination' => $this->getPagination($request, $tasks)
+            'pagination' => $this->getPagination($request, $tasks),
+            'mon_path' => 'list_task'
         ));
     }
 

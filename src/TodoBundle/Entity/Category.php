@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Category.
  *
  * @ORM\Table(name="category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TodoBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -132,5 +132,9 @@ class Category
     public function getColor()
     {
         return $this->color;
+    }
+
+    public function getTasks(){
+        return $this->tasks;
     }
 }

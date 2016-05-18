@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Tag.
  *
  * @ORM\Table(name="tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TodoBundle\Repository\TagRepository")
  */
 class Tag
 {
@@ -66,5 +66,9 @@ class Tag
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getTasks(){
+        return $this->task;
     }
 }

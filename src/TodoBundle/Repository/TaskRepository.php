@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use TodoBundle\Entity\Category;
 use TodoBundle\Entity\Tag;
 use TodoBundle\Entity\User;
+use DateTime;
 
 class TaskRepository extends EntityRepository
 {
@@ -66,6 +67,17 @@ class TaskRepository extends EntityRepository
         return $this->createQueryBuilder('t')
             ->innerJoin('t.tag', 'tag')
             ->where('tag = :tag')->setParameter('tag', $tag)
+            ->andWhere('t.user = :user')->setParameter('user', $user)
+            ->orderBy('t.'.$field, $order)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getTasksPassedByUser(User $user, $field, $order)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.dueDate < :currentDate')->setParameter('currentDate', new DateTime(date("Y-m-d H:i:s")))
             ->andWhere('t.user = :user')->setParameter('user', $user)
             ->orderBy('t.'.$field, $order)
             ->getQuery()
