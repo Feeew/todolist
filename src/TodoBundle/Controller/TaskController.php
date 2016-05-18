@@ -105,7 +105,7 @@ class TaskController extends Controller
             'pagination' => $this->getPagination($request, $tasks)
         ));
     }
-
+/**/
     /**
      * @Route("/task/tag/{tag}/{field}/{order}", requirements={
      *     "tag" = "\d+",
