@@ -178,4 +178,29 @@ class TaskController extends Controller
             'tasks' => $tasks,
         ));
     }
+    /**
+     * @Route("/task/modify/{task}",requirements={"task" = "\d+"}, name="modify_task")
+     */
+    public function editAction($task)
+    {
+        $select_task = $this->getDoctrine()->getRepository('TodoBundle:Task')->find($task->getId());
+
+        $editForm = $this->createForm(new TaskType(),$select_task);
+        return $this->render('TodoBundle:Task:edit.html.twig', array(
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+    /**
+     * @Route("/task/remove/{task}",requirements={"task" = "\d+"}, name="remove_task")
+     */
+    public function deleteAction(Task $task)
+    {
+            $em = $this->getDoctrine()->getEntityManager();
+            $select_task = $em->getRepository('TodoBundle:Task')->find($task->getId());
+
+            $em->remove($select_task);
+            $em->flush();
+
+        return $this->redirect("/task/list");
+    }
 }

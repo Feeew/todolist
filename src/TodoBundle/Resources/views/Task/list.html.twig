@@ -24,6 +24,9 @@
             <th>
                 Tags
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     {% for task in pagination %}
         <tr>
@@ -45,6 +48,10 @@
                 {% for tag in task.tag %}
                 <a href="{{ path('list_task_tag', {tag: tag.id}) }}"><span class="glyphicon glyphicon-tag"></span> {{ tag.title }}</a>
                 {% endfor %}
+            </td>
+            <td>
+                <a href="{{ path('modify_task',{task: task.id}) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="{{ path('remove_task',{task: task.id}) }}"><span class="glyphicon glyphicon-remove"></span></a>
             </td>
         </tr>
     {% else %}
