@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use DateTime;
 
 class TaskType extends AbstractType
 {
@@ -22,9 +23,11 @@ class TaskType extends AbstractType
             ))
             ->add('dueDate', null, array(
                 'label' => 'task.form.duedate',
+                'data' => new DateTime(date("Y-m-d h:i:s"))
             ))
             ->add('remindAt', null, array(
                 'label' => 'task.form.remindat',
+                'data' => new DateTime(date("Y-m-d h:i:s"))
             ))
             ->add('status', null, array(
                 'label' => 'task.form.status',
