@@ -179,4 +179,23 @@ class TaskController extends Controller
             'tasks' => $tasks,
         ));
     }
+
+    /**
+    +     * @Route("/task/remove/{task}",requirements={"task" = "\d+"}, name="remove_task")
+    +     */
+    public function deleteAction(Task $task)
+     {
+         $em = $this->getDoctrine()->getEntityManager();
+         $select_task = $em->getRepository('TodoBundle:Task')->find($task->getId());
+
+         $em->remove($select_task);
+         $em->flush();
+
+         $this->addFlash(
+             'notice',
+             'Task deleted'
+         );
+
+         return $this->redirect("/task/list");
+     }
 }

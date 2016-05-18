@@ -28,6 +28,9 @@
             <th>
                 Share
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     {% for task in pagination %}
         <tr>
@@ -57,6 +60,9 @@
                 <a href="mailto:?subject={{ subject|url_encode }}&body={{ body|url_encode }}">
                     Envoyer mail
                 </a>
+            </td>
+            <td>
+                <a href="{{ path('remove_task',{task: task.id}) }}"><span class="glyphicon glyphicon-remove"></span></a>
             </td>
         </tr>
     {% else %}
