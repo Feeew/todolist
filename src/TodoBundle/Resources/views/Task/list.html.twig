@@ -63,6 +63,7 @@
             </td>
             <td>
                 <a href="{{ path('remove_task',{task: task.id}) }}"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="{{ path('edit_task',{id: task.id}) }}"><span class="glyphicon glyphicon-pencil"></span></a>
             </td>
         </tr>
     {% else %}

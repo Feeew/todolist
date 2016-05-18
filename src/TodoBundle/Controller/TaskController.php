@@ -198,4 +198,39 @@ class TaskController extends Controller
 
          return $this->redirect("/task/list");
      }
+
+    /**
+     * @Route("/task/edit/{id}",requirements={
+     *     "id" = "\d+"
+     * },
+     *  name="edit_task")
+     */
+    public function editAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $task = $em
+            ->getRepository('TodoBundle:Task')
+            ->find($id);
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($task);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Task edited with success'
+            );
+
+            return $this->redirect('/task/list');
+        }
+        else{
+
+            return $this->render('TodoBundle:Task:create.html.twig', array('form' => $form->createView()));
+        }
+    }
 }
